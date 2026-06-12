@@ -1,11 +1,4 @@
-# Конфигурация сборки Railway/Nixpacks для Python-проекта без pip-зависимостей
-providers = ["python"]
-
+# Nixpacks: Python без pip-зависимостей (только stdlib)
 [variables]
 NIXPACKS_PYTHON_VERSION = "3.11"
-
-[phases.install]
-cmds = ["pip install -r requirements.txt"]
-
-[start]
-cmd = "python3 app.py"
+NIXPACKS_PYTHON_PACKAGE_MANAGER = "skip"
