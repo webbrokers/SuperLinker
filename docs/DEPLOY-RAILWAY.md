@@ -52,13 +52,13 @@ GitHub (код)  ──push──►  Railway (Python WSGI)  ──►  Volume: 
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python app.py"
+startCommand = "python3 app.py"
 healthcheckPath = "/health"
 healthcheckTimeout = 30
 restartPolicyType = "ON_FAILURE"
 ```
 
-Nixpacks определит Python из репозитория. `requirements.txt` не нужен.
+Nixpacks определит Python из `requirements.txt` + `nixpacks.toml`. `requirements.txt` пустой — зависимостей pip нет.
 
 ---
 
