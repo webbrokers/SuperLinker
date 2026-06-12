@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админка — SuperLinker</title>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="/static/js/theme.js" defer></script>
+  <script src="/static/js/chart.js" defer></script>
+  <script src="/static/js/admin.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16h6m0 0a3 3 0 106 0m-6 0a3 3 0 116 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#818CF8"/></linearGradient></defs></svg>
+        <span class="logo-text">SuperLinker</span>
+      </a>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Главная</a>
+        <a href="/shorten" class="nav-link">Сократить</a>
+        <a href="/admin" class="nav-link active">Админ</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Тема">◐</button>
+        <a href="/admin/logout" class="btn-ghost btn-sm">Выйти</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page-admin">
+    <div class="admin-top">
+      <h1 class="page-title">Админ-панель</h1>
+      <a href="/api/admin/export-all.csv" class="btn-ghost btn-sm">Экспорт всего CSV</a>
+    </div>
+
+    <div class="bento-grid admin-stats">
+      <div class="card stat-card">
+        <span class="stat-label">Всего ссылок</span>
+        <span class="stat-value">{{total_links}}</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Кликов сегодня</span>
+        <span class="stat-value">{{clicks_today}}</span>
+      </div>
+    </div>
+
+    <div class="card admin-tools">
+      <h2>Тестовые данные</h2>
+      <p class="muted">Генерация кликов за 30 дней (помечены is_test). Очистка не затрагивает реальную статистику.</p>
+      <div class="tool-actions">
+        <button type="button" class="btn-primary btn-sm" id="genTestBtn">Сгенерировать тестовые данные</button>
+        <button type="button" class="btn-ghost btn-sm" id="clearTestBtn">Очистить тестовые данные</button>
+      </div>
+      <p class="tool-msg" id="toolMsg" hidden></p>
+    </div>
+
+    <div class="card">
+      <h2>Все ссылки</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Код</th><th>URL</th><th>Клики</th><th>Истекает</th><th></th></tr>
+          </thead>
+          <tbody>{{links_rows}}</tbody>
+        </table>
+      </div>
+    </div>
+
+    {{stats_section}}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>SuperLinker</p></div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<section class="card stats-detail" id="statsDetail" data-link-id="{{link_id}}">
+  <h2>Статистика: {{slug}}</h2>
+  <p class="muted"><a href="{{short_url}}" target="_blank">{{short_url}}</a></p>
+  <p class="muted url-cell" title="{{original_url}}">{{original_url}}</p>
+
+  <div class="chart-wrap">
+    <canvas id="statsChart" width="800" height="260" data-chart='{{chart_data}}'></canvas>
+  </div>
+
+  <div class="stats-actions">
+    <a href="/api/links/clicks.csv?id={{link_id}}" class="btn-primary btn-sm">Скачать CSV</a>
+  </div>
+
+  <h3>Топ referer'ов</h3>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Источник</th><th>Переходов</th></tr></thead>
+      <tbody>{{referer_rows}}</tbody>
+    </table>
+  </div>
+</section>

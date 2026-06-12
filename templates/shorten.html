@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сократить ссылку — SuperLinker</title>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="/static/js/theme.js" defer></script>
+  <script src="/static/js/qrcode.js" defer></script>
+  <script src="/static/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16h6m0 0a3 3 0 106 0m-6 0a3 3 0 116 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#818CF8"/></linearGradient></defs></svg>
+        <span class="logo-text">SuperLinker</span>
+      </a>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Главная</a>
+        <a href="/shorten" class="nav-link active">Сократить</a>
+        <a href="/admin" class="nav-link">Админ</a>
+      </nav>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Тема">◐</button>
+    </div>
+  </header>
+
+  <main class="container page-shorten">
+    <h1 class="page-title">Сократить ссылку</h1>
+    <p class="page-sub">Осталось сегодня: <strong id="rateRemaining">{{rate_remaining}}</strong> из {{rate_limit}}</p>
+
+    <div class="card shorten-card">
+      <form id="shortenForm" class="shorten-form">
+        <label class="label" for="url">Длинная ссылка</label>
+        <input class="input" type="url" id="url" name="url" placeholder="https://example.com/very/long/url" required>
+
+        <button type="button" class="btn-ghost params-toggle" id="paramsToggle" aria-expanded="false">
+          + Добавить параметры
+        </button>
+
+        <div class="params-panel" id="paramsPanel" hidden>
+          <label class="label" for="slug">Свой код (необязательно)</label>
+          <input class="input" type="text" id="slug" name="slug" placeholder="любые символы">
+
+          <label class="label" for="expires_days">Срок жизни</label>
+          <select class="input" id="expires_days" name="expires_days">
+            <option value="0">Без срока</option>
+            <option value="1">1 день</option>
+            <option value="7">7 дней</option>
+            <option value="30">30 дней</option>
+          </select>
+
+          <p class="params-heading">UTM-метки (необязательно)</p>
+          <label class="label" for="utm_source">utm_source</label>
+          <input class="input" type="text" id="utm_source" name="utm_source" placeholder="newsletter">
+          <label class="label" for="utm_medium">utm_medium</label>
+          <input class="input" type="text" id="utm_medium" name="utm_medium" placeholder="email">
+          <label class="label" for="utm_campaign">utm_campaign</label>
+          <input class="input" type="text" id="utm_campaign" name="utm_campaign" placeholder="spring2026">
+        </div>
+
+        <button type="submit" class="btn-primary btn-block">Сократить</button>
+      </form>
+
+      <p class="form-error" id="formError" role="alert" hidden></p>
+
+      <div class="result-panel" id="resultPanel" hidden>
+        <p class="label">Короткая ссылка</p>
+        <div class="short-url-result">
+          <a href="#" id="shortUrlLink" target="_blank" rel="noopener"></a>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn-primary btn-sm" id="copyBtn">Копировать</button>
+          <button type="button" class="btn-ghost btn-sm" id="qrBtn">QR-код</button>
+        </div>
+        <div class="qr-wrap" id="qrWrap" hidden>
+          <canvas id="qrCanvas" width="200" height="200"></canvas>
+        </div>
+        <p class="toast" id="toast" hidden>Скопировано!</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>SuperLinker</p></div>
+  </footer>
+</body>
+</html>
